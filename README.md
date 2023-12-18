@@ -18,6 +18,23 @@ type Bar = WithRequired<Foo, 'a'>;
 // { a: string; b?: number; }
 ```
 
+### `IsRequired<Type, Key extends keyof Type>`
+
+Checks if the specified properties are required.
+
+```ts
+type Foo = {
+  a?: string;
+  b: number;
+};
+
+type Bar = IsRequired<Foo, 'a'>;
+// false
+
+type Baz = IsRequired<Foo, 'b'>;
+// true
+```
+
 ### `WithOptional<Type, Key extends keyof Type>`
 
 Makes the specified properties optional.
@@ -30,6 +47,23 @@ type Foo = {
 
 type Bar = WithOptional<Foo, 'a'>;
 // { a?: string; b: number; }
+```
+
+### `IsOptional<Type, Key extends keyof Type>`
+
+Checks if the specified properties are optional.
+
+```ts
+type Foo = {
+  a?: string;
+  b: number;
+};
+
+type Bar = IsOptional<Foo, 'a'>;
+// true
+
+type Baz = IsOptional<Foo, 'b'>;
+// false
 ```
 
 ### `WithImmutable<Type, Key extends keyof Type>`
@@ -111,4 +145,35 @@ type Foo = StructurallyEqual<{ a: string }, { a: string }>;
 
 type Bar = StructurallyEqual<{ a: string }, { a: number }>;
 // false
+```
+
+## StringTypes
+
+### `FromStringEnum<StringEnum>`
+
+Converts a string enum to a union of its values.
+
+```ts
+enum Foo {
+  A = 'a',
+  B = 'b',
+}
+
+type Bar = FromStringEnum<Foo>;
+// 'a' | 'b'
+```
+
+### `ToNumber<String>`
+
+Converts a string to a number.
+
+```ts
+type Foo = ToNumber<'1'>;
+// 1
+
+type Bar = ToNumber<'10'>;
+// 10
+
+type Baz = ToNumber<'Hello world'>;
+// never
 ```
