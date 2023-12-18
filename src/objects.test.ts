@@ -1,6 +1,8 @@
 import { Equal, Expect, Not, StructurallyEqual } from './assertions';
 import {
   AnyObject,
+  IsOptional,
+  IsRequired,
   WithImmutable,
   WithMutable,
   WithOptional,
@@ -89,5 +91,19 @@ export type cases = [
     >
   >,
 
-  Expect<Not<StructurallyEqual<WithMutable<User, 'isActive'>, User>>>
+  Expect<Not<StructurallyEqual<WithMutable<User, 'isActive'>, User>>>,
+
+  /**
+   * IsRequired
+   */
+  Expect<Equal<IsRequired<User, 'name'>, true>>,
+
+  Expect<Not<Equal<IsRequired<User, 'metadata'>, true>>>,
+
+  /**
+   * IsOptional
+   */
+  Expect<Equal<IsOptional<User, 'metadata'>, true>>,
+
+  Expect<Not<Equal<IsOptional<User, 'name'>, true>>>
 ];

@@ -1,19 +1,29 @@
 export type AnyObject = Record<string, any>;
 
-export type WithRequired<T, K extends keyof T> = { [P in K]-?: T[P] } & Omit<
-  T,
-  K
->;
+export type WithRequired<Type, Key extends keyof Type> = {
+  [Property in Key]-?: Type[Property];
+} & Omit<Type, Key>;
 
-export type WithOptional<T, K extends keyof T> = { [P in K]+?: T[P] } & Omit<
-  T,
-  K
->;
+export type IsRequired<Type, Key extends keyof Type> = Pick<
+  Type,
+  Key
+> extends Required<Pick<Type, Key>>
+  ? true
+  : false;
 
-export type WithImmutable<T, K extends keyof T> = {
-  readonly [P in K]: T[P];
-} & Omit<T, K>;
+export type WithOptional<Type, Key extends keyof Type> = {
+  [Property in Key]+?: Type[Property];
+} & Omit<Type, Key>;
 
-export type WithMutable<T, K extends keyof T> = {
-  -readonly [P in K]: T[P];
-} & Omit<T, K>;
+export type IsOptional<
+  Type,
+  Key extends keyof Type
+> = undefined extends Type[Key] ? true : false;
+
+export type WithImmutable<Type, Key extends keyof Type> = {
+  readonly [Property in Key]: Type[Property];
+} & Omit<Type, Key>;
+
+export type WithMutable<Type, Key extends keyof Type> = {
+  -readonly [Property in Key]: Type[Property];
+} & Omit<Type, Key>;
