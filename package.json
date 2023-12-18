@@ -1,0 +1,17 @@
+{
+  "name": "utili-ts",
+  "version": "0.0.1",
+  "description": "TypeScript utility types",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup"
+  },
+  "keywords": [],
+  "author": "Benjamin Rae <benjaminrae93@gmail.com>",
+  "repository": "https://github.com/benjaminrae/utili-ts.git",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  }
+}
